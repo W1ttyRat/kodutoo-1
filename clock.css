@@ -1,26 +1,77 @@
-body{
-    margin:0;
-    padding:0;
-    background-color: rgb(255, 255, 255);
-    font-size: 30px;
-    color:rgb(0, 0, 0);
+body {
+    padding: 0;
+    margin: 0;
 }
 
-#container{
+main {
     display: flex;
-    height: 90vh;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    height: 100vh;
+    position: relative;
 }
 
-#clockContainer {
-    
+main::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("https://picsum.photos/1920/1080");
+    background-size: cover;
+    background-position: center;
+    opacity: 0.7;
+    z-index: 0;
 }
 
-button{
-    font-size: 1.1em;
-    border-radius: 20px;
-    padding: 0px;
+#container, #button, #settings {
+    position: relative;
+    z-index: 1;
+}
+
+#clockContainer, #dateContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Arial', sans-serif;
+    font-size: 3em;
+}
+
+#button button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
     height: 40px;
     width: 40px;
+    border-radius: 25px;
+    opacity: 0.3;
+}
+
+#button button:hover {
+    opacity: 1;
+}
+
+#container {
+    width: 100%;
+}
+
+#settings {
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#settings div {
+    margin-bottom: 10px;
+}
+
+#settings > div > button {
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+#ampm {
+    margin-left: 10px;
 }

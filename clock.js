@@ -3,80 +3,161 @@ const pi = 3.14;
 let hours, minutes, seconds, day, month, year, dateTime;
 let fontSize = 25;
 
-function changeFontSizeBigger(){
-    fontSize = fontSize + 5;
-    if(fontSize > 200){
-        fontSize = 200;
-        window.alert("Fondi suurus ei saa olla üle 200 piksli");
-    }
-    document.getElementById('dateContainer').style.fontSize =  fontSize + "px";
-    document.getElementById('clockContainer').style.fontSize =  fontSize + "px";
-}
-
-function changeFontSizeSmaller(){
-    fontSize = fontSize - 5;
-    if(fontSize < 10){
-        fontSize = 10;
-        window.alert("Fondi suurus ei saa olla alla 10 piksli");
-    }
-    document.getElementById('dateContainer').style.fontSize =  fontSize + "px";
-    document.getElementById('clockContainer').style.fontSize =  fontSize + "px";
-}
-
 function upDateClock() {
+
     dateTime = new Date();
 
     hours = dateTime.getHours();
     minutes = dateTime.getMinutes();
     seconds = dateTime.getSeconds();
 
-    if(hours < 10){
+    if (hours < 10) {
         hours = "0" + hours;
     }
-    if(minutes < 10){
+    if (minutes < 10) {
         minutes = "0" + minutes;
     }
-    if(seconds < 10){
+    if (seconds < 10) {
         seconds = "0" + seconds;
     }
 
+    if (document.getElementById('format').value === '12') {
+        const ampm = hours >= 12 ? 'PM' : 'AM';
+        hours = hours % 12;
+        hours = hours ? hours : 12;
+        document.getElementById('ampm').innerHTML = ampm;
+    }
+
     document.getElementById('hours').innerHTML = hours + ":";
-    document.getElementById('minutes').innerHTML = minutes + ":";
-    document.getElementById('seconds').innerHTML = seconds;
+    document.getElementById('minutes').innerHTML = minutes;
+    document.getElementById('seconds').innerHTML = ":" + seconds;
 }
 
-function updateDate(){
+function updateDate() {
     dateTime = new Date();
     day = dateTime.getDate();
     month = dateTime.getMonth() + 1;
     year = dateTime.getFullYear();
 
-    if(day < 10){
+    if (day < 10) {
         day = "0" + day;
     }
-    if(month < 10){
+    if (month < 10) {
         month = "0" + month;
     }
 
     document.getElementById('day').innerHTML = day + ".";
-    document.getElementById('month').innerHTML = month + ":";
+    document.getElementById('month').innerHTML = month + ".";
     document.getElementById('year').innerHTML = year;
 }
 
-function checkKey(e){
-    console.log(e.keyCode);
-    if(e.keyCode == 43){
-        changeFontSizeBigger();
+function toggleSettings() {
+    console.log("nupp töötab");
+    const settings = document.getElementById('settings');
+    if (settings.style.display === 'none' || settings.style.display === '') {
+        settings.style.display = 'block';
+    } else {
+        settings.style.display = 'none';
     }
-    if(e.keyCode == 45){
-        changeFontSizeSmaller();
+}
+
+function saveSettings() {
+
+    function fontSizeChange() {
+        const newFontSize = document.getElementById('fontSize').value;
+
+        if (newFontSize) {
+            document.getElementById('clockContainer').style.fontSize = newFontSize + 'px';
+            document.getElementById('dateContainer').style.fontSize = newFontSize + 'px';
+        }
+    }
+
+    function fontFamilyChange() {
+        const newFontFamily = document.getElementById('fontFamily').value;
+
+        if (newFontFamily) {
+            document.getElementById('clockContainer').style.fontFamily = newFontFamily;
+            document.getElementById('dateContainer').style.fontFamily = newFontFamily;
+        }
+    }
+
+    function fontColorChange() {
+        const newFontColor = document.getElementById('fontColor').value;
+
+        if (newFontColor) {
+            document.getElementById('clockContainer').style.color = newFontColor;
+            document.getElementById('dateContainer').style.color = newFontColor;
+        }
+    }
+
+    function changeFormat() {
+        const format = document.getElementById('format').value;
+        console.log(format);
+        if (format === '12') {
+            let hours = dateTime.getHours();
+            const minutes = dateTime.getMinutes();
+            const seconds = dateTime.getSeconds();
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12;
+            hours = hours ? hours : 12;
+            document.getElementById('hours').innerHTML = hours + ":";
+            document.getElementById('minutes').innerHTML = minutes < 10 ? '0' + minutes : minutes + ":";
+            document.getElementById('seconds').innerHTML = seconds < 10 ? '0' + seconds : seconds;
+            document.getElementById('ampm').innerHTML = ampm;
+        }
+    }
+
+    function imageBackgroundChange() {
+        const fileInput = document.getElementById('backgroundImage');
+        const file = fileInput.files && fileInput.files[0];
+        console.log(file);
+        if (file) {
+
+            const imageUrl = URL.createObjectURL(file);
+            const main = document.querySelector('main');
+
+            main.style.backgroundImage = `url(${imageUrl})`;
+            main.style.backgroundSize = 'cover';
+            main.style.backgroundPosition = 'center';
+        }
+    }
+
+    function toggleSeconds() {
+        const showSeconds = document.getElementById('showSeconds').checked;
+        document.getElementById('seconds').style.display = showSeconds ? 'inline' : 'none';
+    }
+
+
+
+    fontSizeChange();
+    fontFamilyChange();
+    fontColorChange();
+    changeFormat();
+    imageBackgroundChange();
+    toggleSeconds();
+}
+
+function resetSettings() {
+    document.getElementById('clockContainer').style.fontSize = '';
+    document.getElementById('dateContainer').style.fontSize = '';
+    document.getElementById('clockContainer').style.fontFamily = '';
+    document.getElementById('dateContainer').style.fontFamily = '';
+    document.getElementById('clockContainer').style.color = '';
+    document.getElementById('dateContainer').style.color = '';
+    document.querySelector('main').style.backgroundImage = '';
+}
+
+function fullScreen() {
+    if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+    } else {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        }
     }
 }
 
 upDateClock();
 updateDate();
-setInterval(upDateClock, 1000);
+setInterval(upDateClock, 500);
 setInterval(updateDate, 60000);
-document.getElementById('bigger').addEventListener('click', changeFontSizeBigger);
-document.getElementById('smaller').addEventListener('click', changeFontSizeSmaller);
-window.addEventListener('keypress', checkKey);
