@@ -182,3 +182,8 @@ upDateClock();
 updateDate();
 setInterval(upDateClock, 500);
 setInterval(updateDate, 60000);
+
+document.getElementById('toggleSettings').addEventListener('click', toggleSettings);
+document.getElementById('saveSettings').addEventListener('click', saveSettings);
+document.getElementById('resetSettings').addEventListener('click', resetSettings);
+document.getElementById('fullscreen').addEventListener('click', fullScreen);
