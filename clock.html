@@ -6,11 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="clock.js" defer></script>
     <link rel="stylesheet" href="clock.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron&family=Montserrat&family=Share+Tech+Mono&display=swap"
+        rel="stylesheet">
     <title>Kell</title>
 </head>
 
 <body>
     <main>
+        <video id="bgVideo" autoplay muted loop playsinline></video>
         <div id="container">
             <div id="clockContainer">
                 <div id="hours">00:</div>
@@ -29,27 +32,26 @@
         </div>
         <div id="settings">
             <div>
-                <label for="format">Vali kellavorming:</label>
+                <label for="format">Ajavorming:</label>
                 <select id="format" name="format">
                     <option value="24">24-tunnine</option>
                     <option value="12">12-tunnine</option>
                 </select>
             </div>
             <div>
-                <label for="fontSize">Vali fondisuurus:</label>
-                <input type="number" id="fontSize" name="fontSize" min="10" max="100" value="25">
+                <label for="fontSize">Teksti suurus:</label>
+                <input type="number" id="fontSize" name="fontSize" min="5" max="1000" value="25">
             </div>
             <div>
-                <label for="fontFamily">Vali fondipere:</label>
+                <label for="fontFamily">Muuda fonti:</label>
                 <select id="fontFamily" name="fontFamily">
-                    <option value="'Arial', sans-serif">Arial</option>
-                    <option value="'Courier New', Courier, monospace">Courier New</option>
-                    <option value="'Times New Roman', Times, serif">Times New Roman</option>
-                    <option value="'Verdana', sans-serif">Verdana</option>
+                    <option value="'Share Tech Mono', monospace">Share Tech Mono</option>
+                    <option value="'Orbitron', sans-serif">Orbitron</option>
+                    <option value="'Montserrat', sans-serif">Montserrat</option>
                 </select>
             </div>
             <div>
-                <label for="fontColor">Vali fondivärv:</label>
+                <label for="fontColor">Teksti värv:</label>
                 <input type="color" id="fontColor" name="fontColor" value="#000000">
             </div>
             <div>

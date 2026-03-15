@@ -1,4 +1,5 @@
 console.log("fail ühendatud");
+const PIXABAY_API_KEY = '55039479-2501ec1bb912cdbce7b203876';
 const pi = 3.14;
 let hours, minutes, seconds, day, month, year, dateTime;
 let fontSize = 25;
@@ -157,6 +158,26 @@ function fullScreen() {
     }
 }
 
+function loadRandomBackground() {
+    const randomPage = Math.floor(Math.random() * 10) + 1;
+
+    fetch(`https://pixabay.com/api/videos/?key=${PIXABAY_API_KEY}&per_page=3&page=${randomPage}`)
+        .then(response => response.json())
+        .then(data => {
+            const videos = data.hits;
+            if (!videos.length) return;
+
+            const randomVideo = videos[Math.floor(Math.random() * videos.length)];
+            const videoUrl = randomVideo.videos.large.url;
+
+            const bgVideo = document.getElementById('bgVideo');
+            bgVideo.src = videoUrl;
+            bgVideo.play();
+        })
+        .catch(err => console.error('Error fetching background video:', err));
+}
+
+loadRandomBackground();
 upDateClock();
 updateDate();
 setInterval(upDateClock, 500);
