@@ -26,6 +26,9 @@
                 <div id="month">01.</div>
                 <div id="year">2000</div>
             </div>
+            <div id="dateDayContainer">
+                <div id="weekday"></div>
+            </div>
         </div>
         <div id="button">
             <button type="button" id="toggleSettings"></button>
@@ -40,7 +43,15 @@
             </div>
             <div>
                 <label for="fontSize">Teksti suurus:</label>
-                <input type="number" id="fontSize" name="fontSize" min="5" max="1000" value="25">
+                <input type="number" id="fontSize" name="fontSize" min="5" max="1000" value="100">
+            </div>
+            <div>
+                <label for="dateSize">Kuupäeva suurus:</label>
+                <input type="number" id="dateSize" name="dateSize" min="5" max="1000" value="100">
+            </div>
+            <div>
+                <label for="daySize">Päeva suurus:</label>
+                <input type="number" id="daySize" name="daySize" min="5" max="1000" value="100">
             </div>
             <div>
                 <label for="fontFamily">Muuda fonti:</label>
@@ -66,6 +77,10 @@
                 <button type="button" id="saveSettings">Salvesta</button>
                 <button type="button" id="resetSettings">Lähtesta</button>
                 <button type="button" id="fullscreen">Täisekraan</button>
+            </div>
+            <div id="credits">
+                <p>Tanel Metshein</p>
+                <a href="https://github.com/W1ttyRat/kodutoo-1">Github Repo</a>
             </div>
         </div>
     </main>

@@ -111,11 +111,15 @@ function saveSettings() {
     function imageBackgroundChange() {
         const fileInput = document.getElementById('backgroundImage');
         const file = fileInput.files && fileInput.files[0];
-        console.log(file);
-        if (file) {
-
+        if (!file) {
+            return;
+        } else {
             const imageUrl = URL.createObjectURL(file);
             const main = document.querySelector('main');
+
+            const bgVideo = document.getElementById('bgVideo');
+            bgVideo.pause();
+            bgVideo.style.display = 'none';
 
             main.style.backgroundImage = `url(${imageUrl})`;
             main.style.backgroundSize = 'cover';
@@ -128,6 +132,23 @@ function saveSettings() {
         document.getElementById('seconds').style.display = showSeconds ? 'inline' : 'none';
     }
 
+    function dateSizeChange() {
+        const newDateSize = document.getElementById('dateSize').value;
+
+        if (newDateSize) {
+            document.getElementById('dateContainer').style.fontSize = newDateSize + 'px';
+        }
+    }
+
+    function daySizeChange() {
+        const newDaySize = document.getElementById('daySize').value;
+        console.log(newDaySize);
+
+        if (newDaySize) {
+            document.getElementById('dateDayContainer').style.fontSize = newDaySize + 'px';
+        }
+    }
+
 
 
     fontSizeChange();
@@ -136,6 +157,9 @@ function saveSettings() {
     changeFormat();
     imageBackgroundChange();
     toggleSeconds();
+    dateSizeChange();
+    daySizeChange();
+
 }
 
 function resetSettings() {
@@ -146,6 +170,8 @@ function resetSettings() {
     document.getElementById('clockContainer').style.color = '';
     document.getElementById('dateContainer').style.color = '';
     document.querySelector('main').style.backgroundImage = '';
+    document.getElementById('bgVideo').style.display = 'block';
+    document.getElementById('bgVideo').play();
 }
 
 function fullScreen() {
@@ -177,9 +203,16 @@ function loadRandomBackground() {
         .catch(err => console.error('Error fetching background video:', err));
 }
 
+function getDayOfWeek() {
+    const daysOfWeek = ['Pühapäev', 'Esmaspäev', 'Teisipäev', 'Kolmapäev', 'Neljapäev', 'Reede', 'Laupäev'];
+    const currentDay = new Date().getDay();
+    document.getElementById('weekday').innerHTML = daysOfWeek[currentDay];
+}
+
 loadRandomBackground();
 upDateClock();
 updateDate();
+getDayOfWeek();
 setInterval(upDateClock, 500);
 setInterval(updateDate, 60000);
 
