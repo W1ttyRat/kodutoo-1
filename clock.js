@@ -73,6 +73,7 @@ function saveSettings() {
         if (newFontSize) {
             document.getElementById('clockContainer').style.fontSize = newFontSize + 'px';
             document.getElementById('dateContainer').style.fontSize = newFontSize + 'px';
+            document.getElementById('weekday').style.fontSize = newFontSize + 'px';
         }
     }
 
@@ -82,6 +83,7 @@ function saveSettings() {
         if (newFontFamily) {
             document.getElementById('clockContainer').style.fontFamily = newFontFamily;
             document.getElementById('dateContainer').style.fontFamily = newFontFamily;
+            document.getElementById('weekday').style.fontFamily = newFontFamily;
         }
     }
 
