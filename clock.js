@@ -29,12 +29,12 @@ function upDateClock() {
         const ampm = hours >= 12 ? 'PM' : 'AM';
         hours = hours % 12;
         hours = hours ? hours : 12;
-        document.getElementById('ampm').innerHTML = ampm;
+        document.getElementById('ampm').textContent = ampm;
     }
 
-    document.getElementById('hours').innerHTML = hours + ":";
-    document.getElementById('minutes').innerHTML = minutes;
-    document.getElementById('seconds').innerHTML = ":" + seconds;
+    document.getElementById('hours').textContent = hours + ":";
+    document.getElementById('minutes').textContent = minutes;
+    document.getElementById('seconds').textContent = ":" + seconds;
 }
 
 function updateDate() {
@@ -50,9 +50,9 @@ function updateDate() {
         month = "0" + month;
     }
 
-    document.getElementById('day').innerHTML = day + ".";
-    document.getElementById('month').innerHTML = month + ".";
-    document.getElementById('year').innerHTML = year;
+    document.getElementById('day').textContent = day + ".";
+    document.getElementById('month').textContent = month + ".";
+    document.getElementById('year').textContent = year;
 }
 
 function toggleSettings() {
@@ -67,13 +67,13 @@ function toggleSettings() {
 
 function saveSettings() {
 
-    function fontSizeChange() {
+    function ClockSizeChange() {
         const newFontSize = document.getElementById('fontSize').value;
+
+
 
         if (newFontSize) {
             document.getElementById('clockContainer').style.fontSize = newFontSize + 'px';
-            document.getElementById('dateContainer').style.fontSize = newFontSize + 'px';
-            document.getElementById('weekday').style.fontSize = newFontSize + 'px';
         }
     }
 
@@ -107,10 +107,10 @@ function saveSettings() {
             const ampm = hours >= 12 ? 'PM' : 'AM';
             hours = hours % 12;
             hours = hours ? hours : 12;
-            document.getElementById('hours').innerHTML = hours + ":";
-            document.getElementById('minutes').innerHTML = minutes < 10 ? '0' + minutes : minutes;
-            document.getElementById('seconds').innerHTML = seconds < 10 ? '0' + seconds : ":" + seconds;
-            document.getElementById('ampm').innerHTML = ampm;
+            document.getElementById('hours').textContent = hours + ":";
+            document.getElementById('minutes').textContent = minutes < 10 ? '0' + minutes : minutes;
+            document.getElementById('seconds').textContent = seconds < 10 ? '0' + seconds : ":" + seconds;
+            document.getElementById('ampm').textContent = ampm;
         }
     }
 
@@ -157,7 +157,7 @@ function saveSettings() {
 
 
     toggleSettings();
-    fontSizeChange();
+    ClockSizeChange();
     fontFamilyChange();
     fontColorChange();
     changeFormat();
@@ -181,7 +181,7 @@ function resetSettings() {
     document.getElementById('seconds').style.display = 'inline';
     document.getElementById('dateDayContainer').style.fontSize = '';
     document.getElementById('weekday').style.color = '';
-    document.getElementById('ampm').innerHTML = '';
+    document.getElementById('ampm').textContent = '';
     document.getElementById('bgVideo').style.display = 'block';
     document.getElementById('bgVideo').play();
     document.getElementById('container').style.transform = 'translate(0px, 0px)';
@@ -222,7 +222,7 @@ function loadRandomBackground() {
 function getDayOfWeek() {
     const daysOfWeek = ['Pühapäev', 'Esmaspäev', 'Teisipäev', 'Kolmapäev', 'Neljapäev', 'Reede', 'Laupäev'];
     const currentDay = new Date().getDay();
-    document.getElementById('weekday').innerHTML = daysOfWeek[currentDay];
+    document.getElementById('weekday').textContent = daysOfWeek[currentDay];
 }
 
 function moveClock(event) {
